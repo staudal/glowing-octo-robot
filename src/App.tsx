@@ -10,7 +10,7 @@ import { supabase } from './utils';
 import { WishlistWithWishes } from './types/WishlistWithWishes';
 
 function App() {
-	const [loading, setLoading] = useState(true);
+	const [_, setLoading] = useState(true);
 	const [session, setSession] = useState<Session | null>(null);
 	const [wishlists, setWishlists] = useState<WishlistWithWishes[]>();
 
@@ -42,7 +42,7 @@ function App() {
 
 		getSession();
 
-		const { data: authListener } = supabase.auth.onAuthStateChange(async (event, session) => {
+		const { data: authListener } = supabase.auth.onAuthStateChange(async (_, session) => {
 			setSession(session);
 			setLoading(false);
 		});

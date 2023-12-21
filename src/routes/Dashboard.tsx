@@ -1,11 +1,8 @@
 import { useEffect, useState } from 'react';
-import { supabase } from '../utils';
 import { Session } from '@supabase/supabase-js';
 import AddWishlistModal from '../components/wishlists/AddWishlistModal';
-import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 import { WishlistWithWishes } from '../types/WishlistWithWishes';
-import { Wishlist } from '../types/Wishlist';
 import DeleteWishlistModal from '../components/wishlists/DeleteWishlistModal';
 
 interface Props {

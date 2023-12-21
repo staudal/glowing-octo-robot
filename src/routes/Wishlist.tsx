@@ -9,8 +9,8 @@ import { Session } from '@supabase/supabase-js';
 
 interface Props {
 	getWishlists: (user_id: string) => void;
-	wishlists: WishlistWithWishes[];
-	session: Session;
+	wishlists: WishlistWithWishes[] | undefined;
+	session: Session | null;
 }
 
 export default function WishlistRoute({ getWishlists, wishlists, session }: Props) {
@@ -20,7 +20,7 @@ export default function WishlistRoute({ getWishlists, wishlists, session }: Prop
 	const { id } = useParams();
 
 	useEffect(() => {
-		if (id) {
+		if (id && wishlists) {
 			const wishlist = wishlists.find(wishlist => wishlist.id === id);
 			if (wishlist) {
 				setWishlist(wishlist);
@@ -30,6 +30,15 @@ export default function WishlistRoute({ getWishlists, wishlists, session }: Prop
 	}, [wishlists, id]);
 
 	if (!wishlist || !wishes) return <p>Loading...</p>;
+
+	if (!session) {
+		return (
+			<div className="flex flex-col items-center justify-center h-full">
+				<p className="text-2xl font-semibold">You are not logged in.</p>
+				<p className="text-lg text-gray-500">Please log in to view your wishlist.</p>
+			</div>
+		);
+	}
 
 	return (
 		<div>

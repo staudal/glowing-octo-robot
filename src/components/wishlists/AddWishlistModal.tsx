@@ -2,7 +2,6 @@ import { Fragment, useEffect, useRef, useState } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
 import { supabase } from '../../utils';
 import toast from 'react-hot-toast';
-import { Wishlist } from '../../types/Wishlist';
 import { ExclamationCircleIcon } from '@heroicons/react/24/solid';
 import { User } from '@supabase/supabase-js';
 
