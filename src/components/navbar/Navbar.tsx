@@ -39,7 +39,7 @@ export default function Navbar() {
 
 		getSession();
 
-		const { data: authListener } = supabase.auth.onAuthStateChange(async (event, session) => {
+		const { data: authListener } = supabase.auth.onAuthStateChange(async (_, session) => {
 			setSession(session);
 		});
 
