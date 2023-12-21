@@ -10,24 +10,23 @@ import { Session } from '@supabase/supabase-js';
 import LoginButton from './LoginButton';
 import { useLocation } from 'react-router-dom';
 
-const navigation = [
+const initialNavigation = [
 	{ name: 'Dashboard', href: '/', current: false },
 	{ name: 'Settings', href: '/settings', current: false },
 ];
 
 export default function Navbar() {
 	const [session, setSession] = useState<Session | null>(null);
+	const [navigation, setNavigation] = useState(initialNavigation);
 
 	const pathname = useLocation().pathname;
 
 	useEffect(() => {
-		const current = navigation.find(item => item.href === pathname);
-		if (current) {
-			navigation.forEach(item => {
-				if (item.href === pathname) item.current = true;
-				else item.current = false;
-			});
-		}
+		const updatedNavigation = navigation.map(item => ({
+			...item,
+			current: item.href === pathname,
+		}));
+		setNavigation(updatedNavigation);
 	}, [pathname]);
 
 	useEffect(() => {
